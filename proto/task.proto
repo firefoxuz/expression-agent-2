@@ -1,5 +1,5 @@
 syntax = "proto3";
-//package agent;
+
 option go_package = "/agent";
 
 message MiniTaskRequest {

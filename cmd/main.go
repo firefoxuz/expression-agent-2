@@ -4,6 +4,7 @@ import (
 	server "expression-agent/internal"
 	pb "expression-agent/proto"
 	"fmt"
+	"github.com/spf13/viper"
 	"google.golang.org/grpc"
 	"log"
 	"net"
@@ -14,9 +15,20 @@ type Server struct {
 	pb.MiniTaskServiceServer
 }
 
+func init() {
+	viper.SetConfigName(".env.json")
+	viper.SetConfigType("json")
+	viper.AddConfigPath("./")
+	err := viper.ReadInConfig()
+	if err != nil {
+		panic(fmt.Errorf("fatal error config file: %w", err))
+	}
+}
+
 func main() {
-	host := "0.0.0.0"
-	port := "2552"
+
+	host := viper.GetString("server.host")
+	port := viper.GetString("server.port")
 
 	addr := fmt.Sprintf("%s:%s", host, port)
 	lis, err := net.Listen("tcp", addr)
