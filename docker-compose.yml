@@ -6,10 +6,5 @@ services:
       context: ./
       dockerfile: ./build/Dockerfile
     restart: unless-stopped
-    networks:
-      - network
-#networks:
-#  network:
-#    name: expression-network
-#    driver: bridge
-#    external: true
+    ports:
+      - "2552:2552"
