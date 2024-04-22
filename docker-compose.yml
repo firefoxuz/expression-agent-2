@@ -9,7 +9,7 @@ services:
     ports:
       - "2552:2552"
     networks:
-      - network
+      - expression-backend-2_network
 networks:
-  network:
-    driver: bridge
+  expression-backend-2_network:
+    external: true
